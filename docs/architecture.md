@@ -26,6 +26,7 @@ src/
 ├── components/          # React 组件
 │   ├── command-palette/ # 命令面板
 │   ├── dialog/          # 弹窗组件
+│   ├── file-tabs/       # 文件标签页（多文件管理）
 │   ├── logo/            # Logo 组件
 │   ├── markdown/        # Markdown 编辑器与预览器
 │   │   ├── editor/      # CodeMirror 编辑器
@@ -37,9 +38,11 @@ src/
 │   └── ui/              # shadcn/ui 组件（CLI 管理）
 ├── content/             # 静态内容（默认 Markdown）
 ├── env/                 # 环境变量管理
+├── hooks/               # 全局 Hooks（use-files-sync 等）
 ├── icons/               # 自定义图标
 ├── lib/                 # 核心业务逻辑
 │   ├── actions/         # 用户操作（导入/导出/复制）
+│   ├── file-storage.ts  # IndexedDB 文件存储
 │   └── markdown/        # Markdown 处理管道
 │       ├── extract/     # 文本提取
 │       ├── lint/        # 格式校验
@@ -47,6 +50,11 @@ src/
 │       └── render/      # Markdown → HTML
 ├── routes/              # TanStack Router 路由
 ├── services/            # 业务服务层
+├── storage/             # 云端存储抽象层
+│   ├── index.ts         # 存储入口（自动选择 S3/DC）
+│   ├── s3-storage.ts    # S3 兼容存储
+│   ├── dc-storage.ts    # DC 图床存储
+│   └── types.ts         # 存储类型定义
 ├── stores/              # Zustand 状态管理
 ├── styles/              # 全局样式
 ├── themes/              # 主题配置
@@ -79,7 +87,7 @@ src/
     └───────┘       └───────┘       └───────┘       └───────┘       └───────┘
         │               │               │               │               │
         ▼               ▼               ▼               ▼               ▼
-   rehype-remark   remark-rehype   remark-retext   markdownlint    S3 Storage
+   rehype-remark   remark-rehype   remark-retext   markdownlint    S3/DC Storage
                         │
                         ▼
                 ┌───────────────┐
@@ -126,13 +134,14 @@ src/
 ┌─────────────────────────────────────────────────────────────┐
 │                      Zustand Stores                         │
 ├─────────────────┬─────────────────┬─────────────────────────┤
-│  markdownStore  │   editorStore   │      previewStore       │
+│   filesStore    │   editorStore   │      previewStore       │
 │                 │                 │                         │
-│  • content      │  • scrollRatio  │  • previewWidth         │
-│                 │  • scrollSource │  • userPreferredWidth   │
-│                 │  • footnoteLinks│  • markdownStyle        │
-│                 │  • newWindow    │  • codeTheme            │
-│                 │  • scrollSync   │  • renderedHtmlMap      │
+│  • files[]      │  • scrollRatio  │  • previewWidth         │
+│  • activeFileId │  • scrollSource │  • userPreferredWidth   │
+│  • currentContent│ • footnoteLinks│  • markdownStyle        │
+│  • isInitialized│  • newWindow    │  • codeTheme            │
+│  • hasHydrated  │  • scrollSync   │  • customCss            │
+│                 │                 │  • renderedHtmlMap      │
 ├─────────────────┴─────────────────┴─────────────────────────┤
 │                   commandPaletteStore                       │
 │                                                             │
@@ -142,17 +151,60 @@ src/
 
 ### 持久化策略
 
-| Store               | LocalStorage Key | 持久化内容                 |
-| ------------------- | ---------------- | -------------------------- |
-| markdownStore       | `bm.md.markdown` | 全部内容                   |
-| editorStore         | `bm.md.editor`   | 设置项（不含滚动状态）     |
-| previewStore        | `bm.md.preview`  | 样式偏好（不含 HTML 缓存） |
-| commandPaletteStore | -                | 不持久化                   |
+| Store               | LocalStorage Key | 持久化内容                                   |
+| ------------------- | ---------------- | -------------------------------------------- |
+| filesStore          | `bm.md.files`    | 文件元数据、activeFileId（内容存 IndexedDB） |
+| editorStore         | `bm.md.editor`   | 设置项（不含滚动状态）                       |
+| previewStore        | `bm.md.preview`  | 样式偏好、customCss（不含 HTML 缓存）        |
+| commandPaletteStore | -                | 不持久化                                     |
 
 ### Store 交互
 
 - `editorStore` 设置变更时，调用 `previewStore.clearRenderedHtmlCache()` 清除缓存
+- `filesStore` 使用 `hasHydrated` 标志确保 IndexedDB 内容在 Store 元数据恢复后加载
 - 组件通过 Hooks 订阅 Store，实现响应式更新
+
+---
+
+## 存储架构
+
+### 本地存储（文件内容）
+
+使用 IndexedDB 存储用户的 Markdown 文档内容：
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    file-storage.ts                           │
+├──────────────────────────────────────────────────────────────┤
+│  IndexedDB (idb)                                             │
+│  ├─ Database: bm.md                                          │
+│  └─ ObjectStore: files                                       │
+│      └─ { id: string, content: string }                      │
+├──────────────────────────────────────────────────────────────┤
+│  降级策略                                                     │
+│  └─ 浏览器不支持时自动降级为内存存储                           │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### 云端存储（图片上传）
+
+支持 S3 兼容存储与 DC 图床双后端：
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    storage/index.ts                          │
+├──────────────────────────────────────────────────────────────┤
+│  isS3Configured()                                            │
+│  ├─ true  → S3Storage (Cloudflare R2, MinIO, AWS S3)         │
+│  └─ false → DCStorage (默认图床)                              │
+├──────────────────────────────────────────────────────────────┤
+│  环境变量                                                     │
+│  ├─ S3_ACCESS_KEY_ID                                         │
+│  ├─ S3_SECRET_ACCESS_KEY                                     │
+│  ├─ S3_ENDPOINT                                              │
+│  └─ S3_BUCKET                                                │
+└──────────────────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -288,6 +340,7 @@ server.registerTool('lint', lintDefinition, handler)
 | `markdownPlugin`              | Markdown 文件导入 |
 | `tanstackStart`               | SSR 支持          |
 | `babel-plugin-react-compiler` | React 编译器优化  |
+| `vite-plugin-pwa`             | PWA 支持          |
 
 ### 代码分割
 
