@@ -59,7 +59,13 @@
   margin-bottom: 24px;
 }
 
-#bm-md h2:first-child {
+/* 首个标题无上边距 */
+#bm-md > h1:first-child,
+#bm-md > h2:first-child,
+#bm-md > h3:first-child,
+#bm-md > h4:first-child,
+#bm-md > h5:first-child,
+#bm-md > h6:first-child {
   margin-top: 0;
 }
 
@@ -277,520 +283,33 @@
 }
 
 #bm-md pre {
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  text-align: left;
   margin: 20px 0;
   padding: 0;
-  background: #282c34;
+  background: #f6faf8;
+  border: 1px solid #d4e5de;
+  border-left: 3px solid #2bae85;
+  border-radius: 4px;
   overflow: hidden;
 }
 
 #bm-md pre code {
   display: block;
   padding: 16px 20px;
-  color: #abb2bf;
-  background: #282c34;
+  background: transparent;
+  color: #2c2c2c;
   font-family: 'SF Mono', Consolas, Monaco, 'Courier New', monospace;
   font-size: 14px;
   line-height: 1.6;
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  border: none;
+  border-radius: 0;
   overflow-x: auto;
-  overflow-y: hidden;
 }
 
-#bm-md pre code.hljs {
-  padding: 16px 20px !important;
-}
-
-/* 代码高亮样式 - One Dark 主题，覆盖 hljs inline styles */
-#bm-md pre .hljs-comment,
-#bm-md pre .hljs-quote,
-#bm-md pre code .hljs-comment,
-#bm-md pre code .hljs-quote {
-  color: #5c6370 !important;
-}
-
-#bm-md pre .hljs-keyword,
-#bm-md pre .hljs-selector-tag,
-#bm-md pre .hljs-key,
-#bm-md pre .hljs-built_in,
-#bm-md pre code .hljs-keyword,
-#bm-md pre code .hljs-selector-tag,
-#bm-md pre code .hljs-key,
-#bm-md pre code .hljs-built_in {
-  color: #c678dd !important;
-}
-
-#bm-md pre .hljs-string,
-#bm-md pre .hljs-attr,
-#bm-md pre .hljs-symbol,
-#bm-md pre .hljs-template-string,
-#bm-md pre .hljs-template-variable,
-#bm-md pre .hljs-type,
-#bm-md pre .hljs-literal,
-#bm-md pre code .hljs-string,
-#bm-md pre code .hljs-attr,
-#bm-md pre code .hljs-symbol,
-#bm-md pre code .hljs-template-string,
-#bm-md pre code .hljs-template-variable,
-#bm-md pre code .hljs-type,
-#bm-md pre code .hljs-literal {
-  color: #98c379 !important;
-}
-
-#bm-md pre .hljs-title,
-#bm-md pre .hljs-function_ .hljs-title,
-#bm-md pre .hljs-title.function_,
-#bm-md pre .hljs-section,
-#bm-md pre code .hljs-title,
-#bm-md pre code .hljs-function_ .hljs-title,
-#bm-md pre code .hljs-title.function_,
-#bm-md pre code .hljs-section {
-  color: #61afef !important;
-}
-
-#bm-md pre .hljs-attribute,
-#bm-md pre .hljs-name,
-#bm-md pre .hljs-number,
-#bm-md pre .hljs-regexp,
-#bm-md pre .hljs-link,
-#bm-md pre .hljs-variable,
-#bm-md pre .hljs-params,
-#bm-md pre code .hljs-attribute,
-#bm-md pre code .hljs-name,
-#bm-md pre code .hljs-number,
-#bm-md pre code .hljs-regexp,
-#bm-md pre code .hljs-link,
-#bm-md pre code .hljs-variable,
-#bm-md pre code .hljs-params {
-  color: #d19a66 !important;
-}
-
-#bm-md pre .hljs-meta,
-#bm-md pre .hljs-subst,
-#bm-md pre code .hljs-meta,
-#bm-md pre code .hljs-subst {
-  color: #a57a4c !important;
-}
-
-#bm-md pre .hljs-operator,
-#bm-md pre .hljs-punctuation,
-#bm-md pre code .hljs-operator,
-#bm-md pre code .hljs-punctuation {
-  color: #abb2bf !important;
-}
-
-#bm-md pre .hljs-deletion,
-#bm-md pre code .hljs-deletion {
-  color: #f79a32 !important;
-}
-
-#bm-md pre .hljs-addition,
-#bm-md pre code .hljs-addition {
-  color: #98c379 !important;
-  text-decoration: underline;
-}
-
-#bm-md pre .hljs-emphasis,
-#bm-md pre code .hljs-emphasis {
-  font-style: italic !important;
-}
-
-#bm-md pre .hljs-strong,
-#bm-md pre code .hljs-strong {
-  font-weight: 700 !important;
-}
-
-#bm-md pre .hljs-selector-class,
-#bm-md pre .hljs-selector-id,
-#bm-md pre code .hljs-selector-class,
-#bm-md pre code .hljs-selector-id {
-  color: #e06c75 !important;
-}
-
-#bm-md pre .hljs-selector-pseudo,
-#bm-md pre code .hljs-selector-pseudo {
-  color: #56b6c2 !important;
-}
-
-#bm-md pre .hljs-doctag,
-#bm-md pre code .hljs-doctag {
-  color: #e06c75 !important;
-}
-
-/* 语法高亮样式 - 参考 highlight.js 默认主题 */
-#bm-md pre code .hljs-comment {
-  color: #5c6370;
-}
-
-#bm-md pre code .hljs-keyword {
-  color: #c678dd;
-}
-
-#bm-md pre code .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre code .hljs-title {
-  color: #61afef;
-}
-
-#bm-md pre code .hljs-function_ {
-  color: #61afef;
-}
-
-#bm-md pre code .hljs-built_in {
-  color: #f79a32;
-}
-
-#bm-md pre code .hljs-variable {
-  color: #f79a32;
-}
-
-#bm-md pre code .hljs-property {
-  color: #abb2bf;
-}
-
-#bm-md pre code .hljs-attr {
-  color: #d19a66;
-}
-
-#bm-md pre code .hljs-number {
-  color: #d19a66;
-}
-
-#bm-md pre code .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre code .hljs-params {
-  color: #abb2bf;
-}
-
-#bm-md pre code .hljs-function_ .hljs-params {
-  color: #abb2bf;
-}
-
-#bm-md pre code .hljs-title.function_ .hljs-params .hljs-punctuation {
-  color: #abb2bf;
-}
-
-#bm-md pre code .hljs-subst {
-  color: #a57a4c;
-}
-
-#bm-md pre code .hljs-meta .hljs-keyword {
-  color: #c678dd;
-}
-
-#bm-md pre code .hljs-meta .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre code .hljs-meta .hljs-type {
-  color: #61afef;
-}
-
-#bm-md pre code .hljs-template-string {
-  color: #56b6c2;
-}
-
-#bm-md pre code .hljs-symbol {
-  color: #abb2bf;
-}
-
-#bm-md pre code .hljs-regexp {
-  color: #e06c75;
-}
-
-#bm-md pre code .hljs-link {
-  color: #61afef;
-  text-decoration: underline;
-}
-
-#bm-md pre code .hljs-deletion {
-  color: #f79a32;
-}
-
-#bm-md pre code .hljs-addition {
-  color: #f79a32;
-  color: inherit;
-  text-decoration: underline;
-}
-
-#bm-md pre .hljs-keyword {
-  color: #c678dd;
-}
-
-#bm-md pre .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre .hljs-title {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-built_in {
-  color: #98676a;
-}
-
-#bm-md pre .hljs-variable.language_,
-#bm-md pre .hljs-variable {
-  color: #f79a32;
-}
-
-#bm-md pre .hljs-property {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-attr {
-  color: #d19a66;
-}
-
-#bm-md pre .hljs-function_ {
-  color: #f06431;
-}
-
-#bm-md pre .hljs-template-variable,
-#bm-md pre .hljs-subst {
-  color: #e5c07b;
-}
-
-#bm-md pre .hljs-literal {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-number {
-  color: #d19a66;
-}
-
-#bm-md pre .hljs-selector-tag {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-key {
-  color: #c678dd;
-}
-
-#bm-md pre .hljs-operator {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-punctuation {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-doctag {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-class {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-title.class_ {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-title.function_ {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-title.tag {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-title.tag .hljs-name {
-  color: #d19a66;
-}
-
-#bm-md pre .hljs-section {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-meta {
-  color: #a57a4c;
-}
-
-#bm-md pre .hljs-meta .hljs-keyword {
-  color: #c678dd;
-}
-
-#bm-md pre .hljs-meta .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre .hljs-meta .hljs-type {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-template-string {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-number {
-  color: #d19a66;
-}
-
-#bm-md pre .hljs-symbol {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-regexp {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-link {
-  color: #61afef;
-  text-decoration: underline;
-}
-
-#bm-md pre .hljs-deletion {
-  color: #f79a32;
-}
-
-#bm-md pre .hljs-addition {
-  color: #f79a32;
-  color: inherit;
-  text-decoration: underline;
-}
-
-#bm-md pre .hljs-emphasis {
-  font-style: italic;
-}
-
-#bm-md pre .hljs-strong {
-  font-weight: 700;
-}
-
-#bm-md pre .hljs-quote {
-  color: #98c379;
-}
-
-#bm-md pre .hljs-quote .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre .hljs-params {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-title.function_ .hljs-params {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-title.function_ .hljs-params .hljs-punctuation {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-subst {
-  color: #a57a4c;
-}
-
-#bm-md pre .hljs-literal {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-selector-pseudo {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-keyword {
-  color: #c678dd;
-}
-
-#bm-md pre .hljs-operator {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-punctuation {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-function_ .hljs-params {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-function_ .hljs-title.function_ {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-function_ .hljs-title.function_ {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-class {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-class .hljs-title {
-  color: #61afef;
-}
-
-#bm-md pre .hljs-variable {
-  color: #f79a32;
-}
-
-#bm-md pre .hljs-variable.language_ {
-  color: #f79a32;
-}
-
-#bm-md pre .hljs-variable .hljs-operator {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-variable .hljs-punctuation {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-property {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-attr {
-  color: #d19a66;
-}
-
-#bm-md pre .hljs-keyword {
-  color: #c678dd;
-}
-
-#bm-md pre .hljs-string {
-  color: #98c379;
-}
-
-#bm-md pre .hljs-literal {
-  color: #56b6c2;
-}
-
-#bm-md pre .hljs-symbol {
-  color: #abb2bf;
-}
-
-#bm-md pre .hljs-regexp {
-  color: #e06c75;
-}
-
-#bm-md pre .hljs-number {
-  color: #d19a66;
-}
-
-#bm-md pre .hljs-link {
-  color: #61afef;
-  text-decoration: underline;
-}
-
-#bm-md pre .hljs-deletion {
-  color: #f79a32;
-}
-
-#bm-md pre .hljs-addition {
-  color: #f79a32;
-  color: inherit;
-  text-decoration: underline;
+#bm-md table {
+  width: 100%;
+  margin: 16px 0;
+  border-collapse: collapse;
+  font-size: 15px;
 }
 
 #bm-md thead {
@@ -962,6 +481,9 @@
 }
 
 #bm-md .markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 700;
   margin-bottom: 8px;
   font-size: 16px;
