@@ -1,9 +1,9 @@
-import copy from 'copy-to-clipboard'
 import { Check, Copy } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
+import { copyText } from '@/lib/clipboard'
 
 interface CopyButtonProps {
   text: string
@@ -13,8 +13,8 @@ interface CopyButtonProps {
 export function CopyButton({ text, className }: CopyButtonProps) {
   const [copied, setCopied] = useState(false)
 
-  const handleCopy = () => {
-    const success = copy(text)
+  const handleCopy = async () => {
+    const success = await copyText(text)
     if (success) {
       setCopied(true)
       toast.success('复制成功')

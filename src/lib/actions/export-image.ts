@@ -1,5 +1,6 @@
 import type { CaptureResult } from '@zumer/snapdom'
 import { toast } from 'sonner'
+import { copyImage as copyImageToClipboard } from '@/lib/clipboard'
 
 function getPreviewElement(): HTMLElement | null {
   try {
@@ -53,9 +54,8 @@ export async function copyImage() {
     if (!snapshot)
       return
 
-    const { copyBlobToClipboard } = await import('copy-image-clipboard')
     const blob = await snapshot.toBlob({ type: 'png' })
-    await copyBlobToClipboard(blob)
+    await copyImageToClipboard(blob)
     toast.success('已复制图片到剪贴板')
   }
   catch (error) {

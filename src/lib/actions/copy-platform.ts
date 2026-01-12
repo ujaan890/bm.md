@@ -1,7 +1,7 @@
 import type { SupportedPlatform } from '@/config'
-import copy from 'copy-to-clipboard'
 import { toast } from 'sonner'
 import { platformConfig } from '@/config'
+import { copyHtml } from '@/lib/clipboard'
 
 const developingPlatforms: SupportedPlatform[] = ['zhihu', 'juejin']
 
@@ -21,7 +21,7 @@ export async function copyPlatform(
       toast.error('没有可复制的内容')
       return
     }
-    const success = copy(html, { format: 'text/html' })
+    const success = await copyHtml(html)
     if (success) {
       toast.success(config.successMessage)
     }
