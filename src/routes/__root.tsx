@@ -72,7 +72,7 @@ function RootDocument() {
   }, [])
 
   return (
-    <html lang="zh-CMN-Hans" suppressHydrationWarning>
+    <html lang="zh-CN" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
