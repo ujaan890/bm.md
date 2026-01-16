@@ -59,17 +59,20 @@ export function FileTabs() {
   }
 
   return (
-    <div
-      role="tablist"
-      aria-label="打开的文件"
-      className="flex h-8 shrink-0 items-center border-b bg-muted/30"
-    >
+    <div className="flex h-8 shrink-0 items-center border-b bg-muted/30">
       <div
-        role="none"
+        role="tablist"
+        aria-label="打开的文件"
         className="scrollbar-none flex min-w-0 flex-1 overflow-x-auto"
       >
         {files.map(file => (
-          <div key={file.id} ref={setTabRef(file.id)} role="none">
+          <div
+            key={file.id}
+            ref={setTabRef(file.id)}
+            role="tab"
+            aria-selected={file.id === activeFileId}
+            tabIndex={file.id === activeFileId ? 0 : -1}
+          >
             <FileTab
               file={file}
               isActive={file.id === activeFileId}
@@ -80,7 +83,7 @@ export function FileTabs() {
           </div>
         ))}
       </div>
-      <div role="none" className="shrink-0 border-l px-1">
+      <div className="shrink-0 border-l px-1">
         <NewFileButton onClick={handleCreateFile} />
       </div>
     </div>
